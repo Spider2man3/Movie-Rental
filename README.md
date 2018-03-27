@@ -1,2 +1,2 @@
-# Database Management Systems Project: Movie Rental
-##### By Thomas Manu and Adams Bala
+# Movie Rental Project
+#### By Thomas Manu and Adams Bala
