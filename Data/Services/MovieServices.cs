@@ -20,17 +20,17 @@ namespace Data.Services
         private readonly SqlConnection _context = new SqlConnection(ConfigurationManager.ConnectionStrings["Movies"].ToString());
         public List<Movies> GetMovies()
         {
-            var query = @"Select * From Movies";
+            var query = @"Select * From Movie";
             return _context.Query<Movies>(query).AsList();
         }
         public List<SelectListItem> MoviesDropDownList()
         {
-            var query = @"Select * From Movies";
+            var query = @"Select * From Movie";
             List<SelectListItem> list = new List<SelectListItem>();
             list = _context.Query<Movies>(query).Select(x => new SelectListItem
             {
-                Value = x.MovieName,
-                Text = x.MovieName
+                Value = x.Title,
+                Text = x.Description
             }).AsList();
             return list;
         }

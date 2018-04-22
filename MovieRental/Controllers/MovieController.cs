@@ -14,6 +14,7 @@ namespace MovieRental.Controllers
 
         private readonly MovieServices _movie = new MovieServices();
         // GET: Movie
+        [Route("")]
         public ActionResult Index()
         {
             var model = new MovieModel
@@ -22,6 +23,10 @@ namespace MovieRental.Controllers
                 DropDownList = _movie.MoviesDropDownList()               
             };
             return View(model);
+        }
+        public ActionResult About()
+        {
+            return View();
         }
     }
 }
