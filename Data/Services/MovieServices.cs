@@ -34,5 +34,49 @@ namespace Data.Services
             }).AsList();
             return list;
         }
+        public List<string> GetGenreAll()
+        {
+            var query = @"Select Genre 
+                          From Movie
+                          Where Year > 2010 and Description is not null and Genre is not null and Year is not null and Director is not null and Cast is not null
+                          Intersect
+                          Select Genre
+                          From Genres";
+            return _context.Query<string>(query).AsList();
+        }
+        public List<string> MoviesInGenre(string genre)
+        {
+            var query = @"  Select Title 
+                            From Movie
+                            Where Year > 2010 and Description is not null and Genre is not null
+                            and Year is not null and Director is not null and Cast is not null
+                            and Movie.Genre = @Genre";
+            return _context.Query<string>(query, new { Genre = genre }).AsList();         
+           
+        }
+
+        public List<Movies> GetMoviesThatMatch(string search)
+        {
+
+            var query = @"Select * From Movie WHERE Title LIKE '%" + search + "%' and Description is not null and Genre is not null and Year is not null and Director is not null and Cast is not null ";
+            var film = _context.Query<Movies>(query).AsList();
+            foreach(var item in film)
+            {
+                item.Picture = item.Title + ".jpg";
+            }
+
+            return film;
+        }
+
+        public Movies UrlToMovie(string movie)
+        {
+            var query = @"Select * 
+                        From Movie
+                        Where Movie.Title = @Movie";
+            var film = _context.Query<Movies>(query, new { Movie = movie }).FirstOrDefault();
+            film.Picture = film.Title + ".jpg";
+            return film;
+
+        }
     }
 }

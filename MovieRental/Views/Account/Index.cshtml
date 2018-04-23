@@ -1,0 +1,21 @@
+﻿@model MovieRental.Models.AccountModel
+@{
+    ViewBag.Title = "Index";
+}
+
+
+HELLO!!! IT'S ME!!! @Model.User.Name
+This is my email: @Model.User.Email
+
+These are my favorite movies: 
+<ul>
+    @foreach (var item in Model.User.FavoriteMovies)
+    {
+        <a href="@Url.Action("MovieDetails","Movie",new {movie = item })" class="list-group-item list-group-item-action">@item</a>
+    }
+</ul>
+
+
+
+
+

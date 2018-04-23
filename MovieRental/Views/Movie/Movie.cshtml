@@ -1,0 +1,17 @@
+﻿@model MovieRental.Models.MovieModel
+@{
+    ViewBag.Title = Model.Movie.Title + " - ChillFlix";
+}
+
+<div class="container">
+    <div class="col-sm-6">
+        <img id="movieImg" src="~/pythonfiles/@Model.Movie.Picture" height="50%" width="20%" />
+    </div>
+    <div class="col-sm-6">
+        <h2>@Model.Movie.Title</h2>
+        <p>@Model.Movie.Description</p>
+        <p>Year: @Model.Movie.Year</p>
+        <p>Director: @Model.Movie.Director</p>
+        <p>Cast: @Model.Movie.Cast</p>
+    </div>
+</div>

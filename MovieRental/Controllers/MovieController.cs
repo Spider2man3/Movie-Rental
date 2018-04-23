@@ -13,20 +13,62 @@ namespace MovieRental.Controllers
     {
 
         private readonly MovieServices _movie = new MovieServices();
+        private readonly AccountServices _account = new AccountServices();
+
         // GET: Movie
         [Route("")]
-        public ActionResult Index()
+        public ActionResult Index(string user)
         {
             var model = new MovieModel
             {
                 Movies = _movie.GetMovies(),
-                DropDownList = _movie.MoviesDropDownList()               
+                LoggedIn = user != null ? true : false
             };
             return View(model);
         }
-        public ActionResult About()
+        public ActionResult About(string user)
         {
+            ViewBag.User = user;
             return View();
+        }
+        public ActionResult Genres(string user)
+        {
+
+            var model = new MovieModel
+            {
+                Genres = _movie.GetGenreAll(),
+                 LoggedIn = user != null ? true : false
+            };
+            
+            return View(model);
+        }
+        public ActionResult MoviesGenre(string genre, string user)
+        {
+            var model = new MovieModel
+            {
+                MoviesInEachGenre = _movie.MoviesInGenre(genre),
+                LoggedIn = user != null ? true : false,
+                Genre = genre
+            };
+            return View(model);
+        }
+        public ActionResult Movie(string movie, string user)
+        {
+            var model = new MovieModel
+            {
+                Movie = _movie.UrlToMovie(movie),
+                LoggedIn = user != null ? true : false
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            var model = new MovieModel
+            {
+                Movies = _movie.GetMoviesThatMatch(search)
+            };
+            return View(model);
         }
     }
 }

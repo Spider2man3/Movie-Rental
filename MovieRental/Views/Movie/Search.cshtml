@@ -1,0 +1,11 @@
+﻿@model MovieRental.Models.MovieModel
+@{
+    ViewBag.Title = "Search - ChillFlix";
+}
+
+<div class="container">
+    @foreach (var item in Model.Movies)
+    {
+        <a href="@Url.Action("Movie", "Movie", new { movie = item.Title})"><img src="~/pythonfiles/@item.Picture" height="50%" width="20%" alt="@item.Title"/></a>
+    }
+</div>

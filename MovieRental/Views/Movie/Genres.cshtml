@@ -1,0 +1,15 @@
+﻿@model MovieRental.Models.MovieModel
+@{
+    ViewBag.Title = "Genre - ChillFlix";
+    ViewBag.Logged = Model.LoggedIn;
+}
+
+<div class="container">
+    <h2>Genre List</h2>
+    <ul class="list-group">
+        @foreach (var item in Model.Genres)
+        {
+            <a href="@Url.Action("MoviesGenre","Movie",new {genre = item })" class="list-group-item list-group-item-action">@item</a>
+        }
+    </ul>
+</div>
