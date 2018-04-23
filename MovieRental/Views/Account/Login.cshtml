@@ -7,38 +7,42 @@
 
 <div class="col-md-10 col-md-offset-1">
     <div class="well">
-        <table class="table table-bordered" style="color:#fff;">
-            <thead>
-                <tr class="success">
-                    <td colspan="2">
-                        Login
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        Email
-                    </td>
-                    <td> 
-                        <input type="text" id="txtEmail" placeholder="jonhndoe@southern.edu" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Password
-                    </td>
-                    <td>
-                        <input type="password" id="txtPassword" placeholder="Password" />
-                    </td>
-                </tr>
-                <tr class="success">
-                    <td colspan="2">
-                        <input id="btnLogin" class="btn btn-success" type="button" value="Login" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        @using (Html.BeginForm("Login","Account",FormMethod.Post))
+        {
+            <table class="table table-bordered" style="color:#fff;">
+                <thead>
+                    <tr class="success">
+                        <td colspan="2">
+                            Login
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Email
+                        </td>
+                        <td>
+                            <input type="text" id="txtEmail" name="email" placeholder="jonhndoe@southern.edu" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Password
+                        </td>
+                        <td>
+                            <input type="password" id="txtPassword" name="password" placeholder="Password" />
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td colspan="2">
+                            <input type="submit" name="SaveButton" id="submitBtn" value="Login" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        
        @if (!string.IsNullOrWhiteSpace(ViewBag.errorMsg))
        {
         <div id="divError" class="alert alert-danger collapse">
@@ -49,7 +53,7 @@
                 User does not exist.
             </div>
         </div>
-       }
+           }
         <div id="divError" class="alert alert-danger collapse">
             <a id="linkClose" class="close" href="#">
                 &times;
@@ -62,27 +66,16 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#submitBtn').on("keypress", function (e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).closest('form').submit();
+            }
+        });
         $('#linkClose').click(function () {
             $('#divError').hide('fade');
         });
-        $('#btnLogin').click(function () {
-            $.ajax({
-                url: '/Account/Login',
-                method: 'POST',
-                data: {
-                    Email: $('#txtEmail').val(),
-                    Password: $('#txtPassword').val(),
-                },
-
-                success: function (jqXHR) {
-                    var url = "/Account/Index/" + jqXHR;
-                    window.location.href = url;
-                },
-                error: function (jqXHR) {
-                    $('#divErrorText').text(jqXHR.responseText);
-                    $('#divError').show('fade');
-                }
-            });
-        });
-    });
+           });
 </script>

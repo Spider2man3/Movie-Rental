@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = Model.Genre + " - ChillFlix";
     ViewBag.Logged = Model.LoggedIn;
+    if (Model.User != null)
+    {
+        ViewBag.User = Model.User.Email;
+    }
 }
 
 <div class="container">
@@ -9,7 +13,7 @@
     <ul class="list-group">
         @foreach (var item in Model.MoviesInEachGenre)
         {
-            <a href="@Url.Action("Movie","Movie",new {movie = item })" class="list-group-item list-group-item-action">@item</a>
+            <a href="@Url.Action("Movie","Movie",new {movie = item, user = Model.User != null ? Model.User.Email : null })" class="list-group-item list-group-item-action">@item</a>
         }
     </ul>
 </div>

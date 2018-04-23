@@ -9,5 +9,6 @@ namespace MovieRental.Models
     public class AccountModel
     {
         public Users User { get; set; }
+        public bool Logged { get; set; }
     }
 }

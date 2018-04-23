@@ -1,12 +1,21 @@
 ﻿@model MovieRental.Models.MovieModel
 @{
     ViewBag.Title = Model.Movie.Title + " - ChillFlix";
+    ViewBag.Logged = Model.LoggedIn;
+    if (Model.User != null)
+    {
+        ViewBag.User = Model.User.Email;
+    }
 }
 
 <div class="container">
     <div class="col-sm-6">
         <img id="movieImg" src="~/pythonfiles/@Model.Movie.Picture" height="50%" width="20%" />
     </div>
+    @if (Model.User != null)
+    {
+        <a href="@Url.Action("AddToFavorites","Movie",new {movie = Model.Movie.MovieID,user= Model.User.UserID})"></a>
+    }
     <div class="col-sm-6">
         <h2>@Model.Movie.Title</h2>
         <p>@Model.Movie.Description</p>
@@ -15,3 +24,4 @@
         <p>Cast: @Model.Movie.Cast</p>
     </div>
 </div>
+<iframe width="420" height="345" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>

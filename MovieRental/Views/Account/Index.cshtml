@@ -1,21 +1,42 @@
 ﻿@model MovieRental.Models.AccountModel
 @{
     ViewBag.Title = "Index";
+    ViewBag.Logged = Model.Logged;
+    if (Model.User != null)
+    {
+        ViewBag.User = Model.User.Email;
+    }
 }
 
+<div>
+    <div>
+        @using (Html.BeginForm("EditAccount", "Account", new { user = Model.User.Email }))
+        {
+            <h4>Account Details</h4>
+            <div class="col-sm-6" style="color:#495057;">
+                <a class="list-group-item list-group-item-action" id="name">Name: @Model.User.Name</a>
+                <input class="form-control mr-sm-2" style="display:none;" id="nameTxt" name="name" type="text" placeholder="Name" aria-label="Name" value="@Model.User.Name">
+            </div>
+            <div class="col-sm-6" style="color:#495057; margin-top:10px;">
+                <a class="list-group-item list-group-item-action" id="email">Email: @Model.User.Email</a>
+                <input class="form-control mr-sm-2" style="display:none;" id="emailTxt" name="email" type="text" placeholder="Email" aria-label="Email" value="@Model.User.Email">
+            </div>
+            <div class="col-sm-6" style="color:#495057; margin-top:10px;">
+                <button class="btn btn-default" id="editBtn" type="button">Edit</button>
+                <button class="btn btn-success" style="display:none;" id="submitBtn" type="submit">Submit</button>
+            </div>
+        }
 
-HELLO!!! IT'S ME!!! @Model.User.Name
-This is my email: @Model.User.Email
+    </div>
+</div>
 
-These are my favorite movies: 
+
+
+<h4>Your Favorites: </h4>
 <ul>
     @foreach (var item in Model.User.FavoriteMovies)
     {
-        <a href="@Url.Action("MovieDetails","Movie",new {movie = item })" class="list-group-item list-group-item-action">@item</a>
+        <a href="@Url.Action("MovieDetails", "Movie", new { movie = item })" class="list-group-item list-group-item-action">@item</a>
     }
 </ul>
-
-
-
-
 

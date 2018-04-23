@@ -15,5 +15,6 @@ namespace MovieRental.Models
         public List<string> Genres { get; set; }
         public List<string> MoviesInEachGenre { get; set; }
         public string Genre { get; set; }
+        public Users User { get; set; }
     }
 }

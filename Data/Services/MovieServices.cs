@@ -44,6 +44,14 @@ namespace Data.Services
                           From Genres";
             return _context.Query<string>(query).AsList();
         }
+
+        public void AddToFavorites(string movie,string user)
+        {
+            var query = @"Insert into Favorites
+                          Values (@MovieID,@UserID)";
+            _context.Execute(query, new { MovieID = movie, UserID = user });
+        }
+
         public List<string> MoviesInGenre(string genre)
         {
             var query = @"  Select Title 

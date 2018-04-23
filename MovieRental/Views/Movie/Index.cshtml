@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "ChillFlix";
     ViewBag.Logged = Model.LoggedIn;
+    if(Model.User != null)
+    {
+        ViewBag.User = Model.User.Email;
+    }
+
 }
 
 <div class="carousel slide" id="featuredMovies" data-ride="carousel">

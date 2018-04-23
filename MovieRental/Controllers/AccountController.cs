@@ -15,10 +15,11 @@ namespace MovieRental.Controllers
 
         public ActionResult Index(string user)
         {
-            var person = _account.GetUserName(user);
+            //var person = _account.GetUserName(user);
             var model = new AccountModel()
             {
-                User = _account.GetUserDetails(person)
+                User = _account.GetUserDetails(user),
+                Logged = true
             };
             return View(model);
         }
@@ -31,16 +32,25 @@ namespace MovieRental.Controllers
         }
 
         [HttpPost]
-        public string Login(LoginModel registerModel)
+        public ActionResult Login(string email, string password)
         {
-            var exists = _account.Login(registerModel.Email, registerModel.Password) == true ? true : false;
+            var exists = _account.Login(email, password) == true ? true : false;
             if (exists)
             {
-                return _account.GetUserDetails(registerModel.Email).UserID;
+                return RedirectToAction("Index", new { user = email });
             }
-            return "No User Found";
+            return View("Login", new { errorMsg = "No user found" });
         }
-
+        [HttpPost]
+        public ActionResult EditAccount(string name,string email,string user)
+        {
+            _account.EditAccount(name, email,user);
+            return RedirectToAction("Index", new { user = user });
+        }
+        public ActionResult Logout(string user)
+        {
+            return RedirectToAction("Index", "Movie");
+        }
         [HttpGet]
         public ActionResult Register()
         {

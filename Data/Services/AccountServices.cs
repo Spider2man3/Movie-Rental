@@ -40,6 +40,14 @@ namespace Data.Services
             return person;
         }
 
+        public void EditAccount(string name, string email,string user)
+        {
+            var query = @"Update Users
+                          Set Name = @Name,Email = @Email
+                          Where Email = @User";
+            _context.Execute(query, new { Name = name, Email = email, User = user });
+        }
+
         public bool Login(string email, string password)
         {
             var query = @"Select * From Users Where Email = @User and Password = @Password";

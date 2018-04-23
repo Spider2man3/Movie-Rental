@@ -22,7 +22,8 @@ namespace MovieRental.Controllers
             var model = new MovieModel
             {
                 Movies = _movie.GetMovies(),
-                LoggedIn = user != null ? true : false
+                LoggedIn = user != null ? true : false,
+                User = (user != null ? true : false) == true ? _account.GetUserDetails(user) : null
             };
             return View(model);
         }
@@ -37,10 +38,16 @@ namespace MovieRental.Controllers
             var model = new MovieModel
             {
                 Genres = _movie.GetGenreAll(),
-                 LoggedIn = user != null ? true : false
+                LoggedIn = user != null ? true : false,
+                User = (user != null ? true : false) == true ? _account.GetUserDetails(user) : null
             };
             
             return View(model);
+        }
+        public ActionResult AddToFavorites(string movie,string user)
+        {
+            _movie.AddToFavorites(movie);
+
         }
         public ActionResult MoviesGenre(string genre, string user)
         {
@@ -48,7 +55,8 @@ namespace MovieRental.Controllers
             {
                 MoviesInEachGenre = _movie.MoviesInGenre(genre),
                 LoggedIn = user != null ? true : false,
-                Genre = genre
+                Genre = genre,
+                User = (user != null ? true : false) == true ? _account.GetUserDetails(user) : null
             };
             return View(model);
         }
@@ -57,16 +65,19 @@ namespace MovieRental.Controllers
             var model = new MovieModel
             {
                 Movie = _movie.UrlToMovie(movie),
-                LoggedIn = user != null ? true : false
+                LoggedIn = user != null ? true : false,
+                User = (user != null ? true : false) == true ? _account.GetUserDetails(user) : null
             };
             return View(model);
         }
         [HttpPost]
-        public ActionResult Search(string search)
+        public ActionResult Search(string search, string user)
         {
             var model = new MovieModel
             {
-                Movies = _movie.GetMoviesThatMatch(search)
+                Movies = _movie.GetMoviesThatMatch(search),
+                LoggedIn = user != null ? true : false,
+                User = (user != null ? true : false) == true ? _account.GetUserDetails(user) : null
             };
             return View(model);
         }

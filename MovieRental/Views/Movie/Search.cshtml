@@ -1,7 +1,13 @@
 ﻿@model MovieRental.Models.MovieModel
 @{
     ViewBag.Title = "Search - ChillFlix";
+    ViewBag.Logged = Model.LoggedIn;
+    if (Model.User != null)
+    {
+        ViewBag.User = Model.User.Email;
+    }
 }
+
 
 <div class="container">
     @foreach (var item in Model.Movies)

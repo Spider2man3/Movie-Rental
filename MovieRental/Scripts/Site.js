@@ -19,4 +19,13 @@
             }
         });
     });
+
+    $('#editBtn').click(function () {
+        $('#editBtn').hide();
+        $('#submitBtn').show();
+        $('#name').hide();
+        $('#email').hide();
+        $('#nameTxt').show();
+        $('#emailTxt').show();
+    });
 });
