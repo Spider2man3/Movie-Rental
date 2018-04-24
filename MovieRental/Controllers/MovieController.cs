@@ -46,7 +46,8 @@ namespace MovieRental.Controllers
         }
         public ActionResult AddToFavorites(string movie,string user)
         {
-            _movie.AddToFavorites(movie);
+            _movie.AddToFavorites(movie,user);
+            return RedirectToAction("Index", new { user = user });
 
         }
         public ActionResult MoviesGenre(string genre, string user)

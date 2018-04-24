@@ -33,5 +33,12 @@ hr {
 }
 
 .img-fluid {
-    max-height: 100%
+    height:900px !important;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+
+    color:gainsboro;
+    height: 60px; /* Height of the footer */
 }

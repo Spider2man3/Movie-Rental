@@ -5,46 +5,34 @@
 
 
 
-<div class="col-md-10 col-md-offset-1">
-    <div class="well">
-        @using (Html.BeginForm("Login","Account",FormMethod.Post))
-        {
-            <table class="table table-bordered" style="color:#fff;">
-                <thead>
-                    <tr class="success">
-                        <td colspan="2">
-                            Login
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Email
-                        </td>
-                        <td>
-                            <input type="text" id="txtEmail" name="email" placeholder="jonhndoe@southern.edu" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Password
-                        </td>
-                        <td>
-                            <input type="password" id="txtPassword" name="password" placeholder="Password" />
-                        </td>
-                    </tr>
-                    <tr class="success">
-                        <td colspan="2">
-                            <input type="submit" name="SaveButton" id="submitBtn" value="Login" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        }
-        
-       @if (!string.IsNullOrWhiteSpace(ViewBag.errorMsg))
-       {
+<div class="container col-md-10 col-md-offset-1">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        <div class="col-5-sm" align="center">
+            <h2>Login</h2>
+        </div>
+        <br />
+        <div class="col-5-sm" align="center">
+            <h4>Email</h4>
+        </div>
+        <div class="col-5-sm" align="center">
+            <input type="text" id="txtEmail" name="email" placeholder="jonhndoe@southern.edu" />
+        </div>
+        <div class="col-5-sm" align="center">
+            <h4>Password</h4>
+        </div>
+        <div class="col-5-sm" align="center">
+            <input type="password" id="txtPassword" name="password" placeholder="Password" />
+        </div>
+        <br />
+        <div class="col-5-sm" align="center">
+            <input type="submit" name="SaveButton" id="submitBtn" value="Login" />
+        </div>
+
+    }
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.errorMsg))
+    {
         <div id="divError" class="alert alert-danger collapse">
             <a id="linkClose" class="close" href="#">
                 &times;
@@ -53,14 +41,13 @@
                 User does not exist.
             </div>
         </div>
-           }
-        <div id="divError" class="alert alert-danger collapse">
-            <a id="linkClose" class="close" href="#">
-                &times;
-            </a>
-            <div id="divErrorText">
+    }
+    <div id="divError" class="alert alert-danger collapse">
+        <a id="linkClose" class="close" href="#">
+            &times;
+        </a>
+        <div id="divErrorText">
 
-            </div>
         </div>
     </div>
 </div>
@@ -77,5 +64,5 @@
         $('#linkClose').click(function () {
             $('#divError').hide('fade');
         });
-           });
+    });
 </script>

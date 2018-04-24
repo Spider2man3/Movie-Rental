@@ -36,7 +36,7 @@
 <ul>
     @foreach (var item in Model.User.FavoriteMovies)
     {
-        <a href="@Url.Action("MovieDetails", "Movie", new { movie = item })" class="list-group-item list-group-item-action">@item</a>
+        <a href="@Url.Action("Movie", "Movie", new { movie = item })" class="list-group-item list-group-item-action">@item</a>
     }
 </ul>
 
